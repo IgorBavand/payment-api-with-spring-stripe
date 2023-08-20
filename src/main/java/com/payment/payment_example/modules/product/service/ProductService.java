@@ -23,7 +23,7 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public ResponseEntity<?> registerProduct(ProductRequest productRequest) throws StripeException {
-        Stripe.apiKey = "sk_test_51NgytWGBq9bHOoOQXzc3KZfB5sl5TKFtuzoV8T0PgIsjNXhmFi2IDM3GA4efPOpg7Qsz25tqEpxH4JJmDX5VRGRf00e3gbuaRU";
+        Stripe.apiKey = stripeSecretKey;
 
         ProductCreateParams paramsProduct =
                 ProductCreateParams.builder()
