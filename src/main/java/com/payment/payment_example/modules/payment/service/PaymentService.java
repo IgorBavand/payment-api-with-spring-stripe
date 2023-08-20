@@ -94,7 +94,6 @@ public class PaymentService {
             case "checkout.session.completed":
                 // ...
                 break;
-
             // ... handle other event types
             default:
                 // Unexpected event type
