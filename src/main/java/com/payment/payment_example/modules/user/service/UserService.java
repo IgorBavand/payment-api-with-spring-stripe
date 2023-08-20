@@ -1,5 +1,6 @@
 package com.payment.payment_example.modules.user.service;
 
+import com.payment.payment_example.modules.user.enums.ERole;
 import com.payment.payment_example.modules.user.model.User;
 import com.payment.payment_example.modules.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class UserService {
         }
 
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        newUser.getRoles().add(ERole.ROLE_USER);
         userRepository.save(newUser);
         return ResponseEntity.ok("User registred.");
     }

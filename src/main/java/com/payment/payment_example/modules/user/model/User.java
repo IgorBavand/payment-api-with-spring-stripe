@@ -1,8 +1,12 @@
 package com.payment.payment_example.modules.user.model;
 
+import com.payment.payment_example.modules.user.enums.ERole;
 import lombok.Data;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -16,4 +20,9 @@ public class User {
     private String username;
 
     private String password;
+
+    @ElementCollection(targetClass = ERole.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<ERole> roles = new HashSet<>();
 }
