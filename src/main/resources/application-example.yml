@@ -1,0 +1,8 @@
+server:
+  port: 8090
+
+app-config:
+  stripe:
+    secretKey: your-secret-key
+  webhook:
+    secretKey: your-webhook-key
