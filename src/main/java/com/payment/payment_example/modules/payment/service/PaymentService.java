@@ -34,7 +34,7 @@ public class PaymentService {
     @Value("${app-config.webhook.secretKey}")
     private String webhookSecretKey;
 
-    public String createCheckoutSession() throws StripeException {
+    public String createCheckoutSession(String priceId, Long amount) throws StripeException {
         Stripe.apiKey = stripeSecretKey;
 
         SessionCreateParams params =
@@ -46,8 +46,8 @@ public class PaymentService {
                         .setCustomerEmail(userService.getUserAthenticated())
                         .addLineItem(
                                 SessionCreateParams.LineItem.builder()
-                                        .setQuantity(1L)
-                                        .setPrice("price_1Nh0RlGBq9bHOoOQ9myeZc4y")
+                                        .setQuantity(amount)
+                                        .setPrice(priceId)
                                         .build())
                         .build();
         Session session = Session.create(params);

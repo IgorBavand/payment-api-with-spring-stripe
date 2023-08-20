@@ -16,8 +16,8 @@ public class PaymentController {
     private final PaymentService service;
 
     @GetMapping("/create-checkout-session")
-    public String createCheckoutSession() throws StripeException {
-        return service.createCheckoutSession();
+    public String createCheckoutSession(String priceId, Long amount) throws StripeException {
+        return service.createCheckoutSession(priceId, amount);
     }
 
     @PostMapping(value = "/webhook-listener")
