@@ -1,12 +1,16 @@
 package com.payment.payment_example.modules.product.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
 
     @Id

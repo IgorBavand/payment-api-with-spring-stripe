@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -53,5 +55,9 @@ public class ProductService {
         productRepository.save(productSave);
 
         return ResponseEntity.ok().body(productSave);
+    }
+
+    public List<com.payment.payment_example.modules.product.model.Product> getAll() {
+        return productRepository.findAll();
     }
 }
