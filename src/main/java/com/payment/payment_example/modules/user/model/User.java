@@ -3,7 +3,6 @@ package com.payment.payment_example.modules.user.model;
 import com.payment.payment_example.modules.user.enums.ERole;
 import lombok.Data;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
