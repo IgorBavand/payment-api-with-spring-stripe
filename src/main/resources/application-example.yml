@@ -1,8 +1,34 @@
 server:
-  port: 8090
+  port: 8090 #or any port available
 
 app-config:
   stripe:
-    secretKey: your-secret-key
+    secretKey: your_stripe_secret_key
   webhook:
-    secretKey: your-webhook-key
+    secretKey: your_webhook_key
+
+#spring:
+#  datasource:
+#    url: jdbc:h2:mem:testdb
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password: 123
+#
+#  jpa:
+#    database-platform:
+#      org.hibernate: dialect.H2Dialect
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+  mvc: #config for swagger
+    pathmatch:
+      matching-strategy: ant-path-matcher
+
+  datasource:
+    url: your_database_url
+    username: your_username
+    password: your_password
