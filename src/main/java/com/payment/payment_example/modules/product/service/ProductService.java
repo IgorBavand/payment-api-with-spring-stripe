@@ -1,6 +1,7 @@
 package com.payment.payment_example.modules.product.service;
 
 import com.payment.payment_example.modules.product.dto.ProductRequest;
+import com.payment.payment_example.modules.product.dto.ProductResponse;
 import com.payment.payment_example.modules.product.repository.ProductRepository;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
@@ -57,7 +58,7 @@ public class ProductService {
         return ResponseEntity.ok().body(productSave);
     }
 
-    public List<com.payment.payment_example.modules.product.model.Product> getAll() {
-        return productRepository.findAll();
+    public ResponseEntity<List<ProductResponse>> getAll() {
+        return ResponseEntity.ok().body(ProductResponse.of(productRepository.findAll()));
     }
 }

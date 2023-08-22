@@ -1,6 +1,7 @@
 package com.payment.payment_example.modules.product.controller;
 
 import com.payment.payment_example.modules.product.dto.ProductRequest;
+import com.payment.payment_example.modules.product.dto.ProductResponse;
 import com.payment.payment_example.modules.product.model.Product;
 import com.payment.payment_example.modules.product.service.ProductService;
 import com.stripe.exception.StripeException;
@@ -34,7 +35,7 @@ public class ProductController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "Bearer {token}", required = true, paramType = "header")
     })
-    public List<Product> getAll() {
+    public ResponseEntity<List<ProductResponse>> getAll() {
         return productService.getAll();
     }
 
