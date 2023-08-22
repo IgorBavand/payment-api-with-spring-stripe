@@ -41,8 +41,8 @@ public class PaymentService {
                 SessionCreateParams.builder()
                         .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                         .setMode(SessionCreateParams.Mode.PAYMENT)
-                        .setSuccessUrl(YOUR_DOMAIN + "/payment/success?success=true")
-                        .setCancelUrl(YOUR_DOMAIN + "/payment/canceled?canceled=true")
+                        .setSuccessUrl(YOUR_DOMAIN + "/public/payment/success?success=true")
+                        .setCancelUrl(YOUR_DOMAIN + "/public/payment/canceled?canceled=true")
                         .setCustomerEmail(userService.getUserAthenticated())
                         .addLineItem(
                                 SessionCreateParams.LineItem.builder()
