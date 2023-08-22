@@ -3,6 +3,7 @@ package com.payment.payment_example.modules.user.controller;
 import com.payment.payment_example.modules.product.model.Product;
 import com.payment.payment_example.modules.user.model.User;
 import com.payment.payment_example.modules.user.service.UserService;
+import com.stripe.exception.StripeException;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class UserController {
             @ApiResponse(code = 200, message = "User registred", response = Product.class),
             @ApiResponse(code = 400, message = "Username already used.")
     })
-    public ResponseEntity<?> registerUser(@RequestBody User newUser) {
+    public ResponseEntity<?> registerUser(@RequestBody User newUser) throws StripeException {
         return ResponseEntity.ok().body(service.registerUser(newUser));
     }
 

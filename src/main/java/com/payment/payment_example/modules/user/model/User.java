@@ -21,8 +21,14 @@ public class User {
 
     private String password;
 
+    private String name;
+
     @ElementCollection(targetClass = ERole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<ERole> roles = new HashSet<>();
+
+    @Column(name = "customer_id")
+    private String customerId;
+
 }
