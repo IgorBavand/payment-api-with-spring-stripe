@@ -30,7 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtRequestFilter jwtRequestFilter;
 
     private static final String[] permitAll = {"/api/user/signup",
-            "/public/payment/**"};
+            "/public/payment/**",
+            "/payment/webhook-listener"};
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
