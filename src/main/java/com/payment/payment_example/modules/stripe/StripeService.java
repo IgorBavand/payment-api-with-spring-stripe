@@ -5,10 +5,12 @@ import com.payment.payment_example.modules.user.model.User;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
+import com.stripe.model.CustomerSearchResult;
 import com.stripe.model.Price;
 import com.stripe.model.Product;
 import com.stripe.param.PriceCreateParams;
 import com.stripe.param.ProductCreateParams;
+import com.stripe.param.CustomerSearchParams;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -54,5 +56,17 @@ public class StripeService {
                         .build();
 
         return Price.create(paramsPrice);
+    }
+
+    public CustomerSearchResult searchCustomerById(String customerId) throws StripeException{
+        Stripe.apiKey = stripeSecretKey;
+
+        CustomerSearchParams params =
+                CustomerSearchParams
+                        .builder()
+                        .setQuery("id:'"+customerId+"'")
+                        .build();
+
+        return Customer.search(params);
     }
 }

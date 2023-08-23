@@ -39,11 +39,11 @@ public class UserService {
         return ResponseEntity.ok(UserResponse.of(userRepository.save(newUser)));
     }
 
-    public String getUserAthenticated() {
+    public User getUserAthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            return userDetails.getUsername();
+            return userRepository.findByUsername(userDetails.getUsername()).get();
         } else {
             new ChangeSetPersister.NotFoundException();
         }

@@ -1,5 +1,6 @@
 package com.payment.payment_example.modules.payment.service;
 
+import com.payment.payment_example.modules.stripe.StripeService;
 import com.payment.payment_example.modules.user.service.UserService;
 import com.stripe.Stripe;
 import com.stripe.exception.SignatureVerificationException;
@@ -28,6 +29,8 @@ public class PaymentService {
     private static final String YOUR_DOMAIN = "http://localhost:8090";
 
     private final UserService userService;
+    private final SalesProcessingService salesProcessingService;
+    private final StripeService stripeService;
 
     @Value("${app-config.stripe.secretKey}")
     private String stripeSecretKey;
@@ -44,7 +47,7 @@ public class PaymentService {
                         .setMode(SessionCreateParams.Mode.PAYMENT)
                         .setSuccessUrl(YOUR_DOMAIN + "/public/payment/success?success=true")
                         .setCancelUrl(YOUR_DOMAIN + "/public/payment/canceled?canceled=true")
-                        .setCustomerEmail(userService.getUserAthenticated())
+                        .setCustomer(userService.getUserAthenticated().getCustomerId())
                         .addLineItem(
                                 SessionCreateParams.LineItem.builder()
                                         .setQuantity(amount)
@@ -61,7 +64,7 @@ public class PaymentService {
         try {
             event = Webhook.constructEvent(payload, sigHeader, webhookSecretKey);
         } catch (SignatureVerificationException e) {
-            System.out.println("Failed signature verification");
+            log.info("Failed signature verification = {}", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
@@ -84,13 +87,13 @@ public class PaymentService {
                 // ...
                 break;
             case "payment_intent.created":
-                // ...
+                salesProcessingService.createSale(event);
                 break;
             case "customer.created":
                 // ...
                 break;
             case "charge.succeeded":
-                // ...
+                // cobrança realizada com sucesso
                 break;
             case "checkout.session.completed":
                 // ...
